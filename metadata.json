@@ -1,0 +1,5 @@
+{
+  "name": "VTV Streaming",
+  "description": "A comprehensive streaming platform with Admin content management and Client viewing interfaces, featuring Gemini-powered image editing for poster generation.",
+  "requestFramePermissions": []
+}
