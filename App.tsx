@@ -32,6 +32,9 @@ const App = () => {
   const [uploadTitle, setUploadTitle] = useState('');
   const [uploadDesc, setUploadDesc] = useState('');
   const [uploadCategory, setUploadCategory] = useState('Films populaires');
+  const [uploadVideoUrl, setUploadVideoUrl] = useState('');
+  const [uploadDuration, setUploadDuration] = useState('');
+  const [uploadYear, setUploadYear] = useState('');
   const [uploadImage, setUploadImage] = useState<string>(''); // Base64
   const [uploadImagePrompt, setUploadImagePrompt] = useState('');
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
@@ -208,12 +211,18 @@ const App = () => {
       description: uploadDesc,
       category: uploadCategory,
       thumbnailUrl: uploadImage || 'https://picsum.photos/300/450',
+      videoUrl: uploadVideoUrl || "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      duration: uploadDuration ? parseInt(uploadDuration) : 0,
+      releaseYear: uploadYear ? parseInt(uploadYear) : new Date().getFullYear(),
       isSeries: false, 
     };
     setContentList([newItem, ...contentList]);
     alert('Contenu publié avec succès !');
     setUploadTitle('');
     setUploadDesc('');
+    setUploadVideoUrl('');
+    setUploadDuration('');
+    setUploadYear('');
     setUploadImage('');
     setUploadImagePrompt('');
   };
@@ -494,6 +503,31 @@ const App = () => {
                       onChange={(e) => setUploadDesc(e.target.value)}
                    ></textarea>
                 </div>
+                
+                <InputField 
+                   label="Lien de la vidéo (URL MP4/Youtube/Firebase)" 
+                   placeholder="https://..." 
+                   value={uploadVideoUrl} 
+                   onChange={(e: any) => setUploadVideoUrl(e.target.value)} 
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                   <InputField 
+                      label="Durée (minutes)" 
+                      placeholder="Ex: 120" 
+                      type="number"
+                      value={uploadDuration} 
+                      onChange={(e: any) => setUploadDuration(e.target.value)} 
+                   />
+                   <InputField 
+                      label="Année" 
+                      placeholder="Ex: 2024" 
+                      type="number"
+                      value={uploadYear} 
+                      onChange={(e: any) => setUploadYear(e.target.value)} 
+                   />
+                </div>
+
                 <div className="mb-4">
                   <label className="block text-gray-300 text-sm font-bold mb-2">Catégorie</label>
                   <select 
